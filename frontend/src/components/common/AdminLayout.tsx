@@ -43,6 +43,8 @@ export default function AdminLayout() {
             { key: 'cars', icon: <CarOutlined />, label: 'Duyệt tin' },
             { key: 'users', icon: <UserOutlined />, label: 'Quản lý User' },
             { key: 'brands', icon: <CarOutlined />, label: 'Hãng & Dòng xe' },
+            { key: 'appointments', icon: <CarOutlined />, label: 'Lịch hẹn' },
+            { key: 'webhook', icon: <DashboardOutlined />, label: 'Discord Webhook' },
           ]}
         />
       </Sider>

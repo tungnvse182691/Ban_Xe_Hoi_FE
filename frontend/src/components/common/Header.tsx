@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AutoComplete, Badge, Button, Drawer, Dropdown, Input } from 'antd';
 import {
+  Bell,
   CarFront,
   GitCompareArrows,
   Heart,
@@ -28,6 +29,7 @@ export default function Header() {
   const { user, isAuthenticated, logout } = useAuthStore();
   const favCount = useFavoriteStore((s) => s.ids.length);
   const compareCount = useCompareStore((s) => s.ids.length);
+  const pendingCount = (()=>{ try{ const raw=localStorage.getItem('tommycar_appointments'); const arr: any[] = raw?JSON.parse(raw):[]; return arr.filter(a=>a.sellerId===user?.id && a.status==='Pending').length; }catch{return 0}})();
   const [keyword, setKeyword] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -165,6 +167,11 @@ export default function Header() {
               aria-label="So sánh"
             />
           </Badge>
+          {isAuthenticated && (
+            <Badge count={pendingCount} size="small" className="hidden sm:block">
+              <Button type="text" icon={<Bell size={19} />} onClick={()=>navigate(user?.role==='Admin'?'/admin/appointments':'/appointments')} aria-label="Thông báo"/>
+            </Badge>
+          )}
 
           {isAuthenticated && user ? (
             <Dropdown menu={userMenu} placement="bottomRight">

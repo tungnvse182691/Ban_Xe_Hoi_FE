@@ -18,6 +18,8 @@ import AdminDashboard from '@/pages/admin/Dashboard';
 import AdminPendingCars from '@/pages/admin/PendingCars';
 import AdminUsers from '@/pages/admin/Users';
 import AdminBrands from '@/pages/admin/Brands';
+import AppointmentsAdmin from '@/pages/admin/AppointmentsAdmin';
+import WebhookSettings from '@/pages/admin/WebhookSettings';
 import NotFoundPage from '@/pages/NotFound';
 
 export const router = createBrowserRouter([
@@ -54,7 +56,9 @@ export const router = createBrowserRouter([
           { index: true, element: <AdminDashboard /> },
           { path: 'cars', element: <AdminPendingCars /> },
           { path: 'users', element: <AdminUsers /> },
-          { path: 'brands', element: <AdminBrands /> },        ],
+          { path: 'brands', element: <AdminBrands /> },
+          { path: 'appointments', element: <AppointmentsAdmin /> },
+          { path: 'webhook', element: <WebhookSettings /> },        ],
       },
     ],
   },
