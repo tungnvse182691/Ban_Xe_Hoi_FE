@@ -11,9 +11,12 @@ interface Props {
   car: Car;
   showRemoveFav?: boolean;
   onRemoveFav?: (id: string) => void;
+  variant?: 'default' | 'glass';
+  large?: boolean;
 }
 
-export default function CarCard({ car, showRemoveFav, onRemoveFav }: Props) {
+export default function CarCard({ car, showRemoveFav, onRemoveFav, variant='default', large=false }: Props) {
+  const isGlass = variant==='glass';
   const navigate = useNavigate();
   const toggle = useFavoriteStore((s) => s.toggle);
   const isFav = useFavoriteStore((s) => s.isFavorite(car.id));
@@ -48,10 +51,11 @@ export default function CarCard({ car, showRemoveFav, onRemoveFav }: Props) {
     <Card
       hoverable
       onClick={() => navigate(`/cars/${car.id}`)}
-      className="card-lift img-zoom"
-      styles={{ body: { padding: 14 } }}
+      className={`img-zoom ${isGlass ? 'glass-card' : 'card-lift'}`}
+      styles={{ body: { padding: large ? 18 : 14, background: isGlass ? 'transparent' : undefined } }}
+      style={isGlass ? { background: 'transparent', border: 'none' } : undefined}
       cover={
-        <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
+        <div className="relative overflow-hidden" style={{ aspectRatio: large ? '16/11' : '16/10' }}>
           <img
             src={car.images[0]}
             alt={car.title}
@@ -91,22 +95,22 @@ export default function CarCard({ car, showRemoveFav, onRemoveFav }: Props) {
         </div>
       }
     >
-      <div className="text-xs font-bold uppercase tracking-wider" style={{ color: '#0284c7' }}>
+      <div className="text-xs font-bold uppercase tracking-wider" style={{ color: isGlass ? '#7dd3fc' : '#0284c7' }}>
         {car.brand} • {car.model}
       </div>
-      <div className="line-clamp-2 font-semibold mt-1 font-display" style={{ minHeight: 44, fontSize: 15 }} title={car.title}>
+      <div className="line-clamp-2 font-semibold mt-1 font-display" style={{ minHeight: large ? 52 : 44, fontSize: large ? 18 : 15, color: isGlass ? '#fff' : undefined }} title={car.title}>
         {car.title}
       </div>
-      <div className="font-extrabold text-lg mt-1" style={{ color: '#0b1220' }}>
+      <div className="font-extrabold text-lg mt-1" style={{ color: isGlass ? '#fff' : '#0b1220' }}>
         {formatPrice(car.price)}
       </div>
-      <div className="grid grid-cols-4 gap-1 mt-2 text-xs" style={{ color: '#64748b' }}>
+      <div className="grid grid-cols-4 gap-1 mt-2 text-xs" style={{ color: isGlass ? '#cbd5e1' : '#64748b' }}>
         <span className="flex items-center gap-1"><Calendar size={13} />{car.year}</span>
         <span className="flex items-center gap-1"><Gauge size={13} />{formatMileage(car.mileage)}</span>
         <span className="flex items-center gap-1"><Fuel size={13} />{car.fuel}</span>
         <span className="flex items-center gap-1"><Cog size={13} />{car.transmission}</span>
       </div>
-      <div className="flex items-center justify-between mt-2 pt-2 text-xs" style={{ borderTop: '1px solid #f1f5f9', color: '#64748b' }}>
+      <div className="flex items-center justify-between mt-2 pt-2 text-xs" style={{ borderTop: isGlass ? '1px solid rgba(255,255,255,0.12)' : '1px solid #f1f5f9', color: isGlass ? '#94a3b8' : '#64748b' }}>
         <span className="flex items-center gap-1"><MapPin size={13} />{car.location}</span>
         <Button
           size="small"

@@ -40,6 +40,22 @@ h1, h2, h3, .font-display {
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.22);
 }
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 32px rgba(2, 132, 199, 0.12), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.glass-card:hover {
+  border-color: rgba(14, 165, 233, 0.35);
+  box-shadow: 0 16px 40px rgba(2, 132, 199, 0.22), inset 0 1px 0 rgba(255,255,255,0.14);
+}
+.midnight-section {
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(14,165,233,0.25), transparent 60%),
+              radial-gradient(900px 500px at 90% 30%, rgba(2,132,199,0.18), transparent 60%),
+              linear-gradient(180deg, #0b1220 0%, #0f1f3a 100%);
+}
 
 .text-gold-gradient {
   background: linear-gradient(92deg, #e0f2fe 0%, #0ea5e9 45%, #0284c7 100%); /* Thủy - xanh nước, thay cam */

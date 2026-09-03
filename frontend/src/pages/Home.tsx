@@ -261,35 +261,56 @@ export default function Home() {
         </div>
       </div>
 
-      {/* brand marquee */}
-      <div className="border-b" style={{ background: '#fff', borderColor: '#e8edf3' }}>
+      {/* brand marquee - midnight glass sync */}
+      <div className="border-y midnight-section" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
         <div className="max-w-7xl mx-auto px-4 py-4 marquee-mask overflow-hidden">
           <div className="marquee-track">
             {[...brandsMock, ...brandsMock, ...brandsMock, ...brandsMock].map((b, i) => (
               <button
                 key={b.id + '-' + i}
                 onClick={() => navigate(`/cars?brandId=${b.id}`)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full shrink-0"
-                style={{ background: '#f2f5f9', border: '1px solid #e8edf3', cursor: 'pointer' }}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full shrink-0 glass-card"
+                style={{ cursor: 'pointer', color:'#e2e8f0' }}
               >
                 <BrandBadge letter={b.logo} name={b.name} size={28} />
+                <span className="text-sm font-semibold">{b.name}</span>
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-4">
+      <div className="midnight-section -mx-4 px-4 py-10">
+        <div className="max-w-7xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUp} transition={{ duration: 0.45 }}>
-          <SectionHeader title="Xe nổi bật" sub="Được xem nhiều nhất tuần qua" link="/cars?sortBy=mostViewed" />
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-7 rounded-full" style={{ background: 'linear-gradient(#38bdf8,#0284c7)' }} />
+                <h2 className="text-xl md:text-2xl font-extrabold m-0 tracking-tight font-display" style={{color:'#fff'}}>Xe nổi bật</h2>
+                <span className="ml-2 text-xs font-bold px-2.5 py-1 rounded-full" style={{background:'rgba(14,165,233,0.18)', color:'#7dd3fc', border:'1px solid rgba(14,165,233,0.3)'}}>Midnight Bento</span>
+              </div>
+              <p className="text-sm mt-1 ml-3.5" style={{ color: '#94a3b8' }}>Được xem nhiều nhất tuần qua • Liquid Glass</p>
+            </div>
+            <Link to="/cars?sortBy=mostViewed" className="flex items-center gap-1 text-sm font-semibold shrink-0" style={{ color: '#7dd3fc' }}>
+              Xem tất cả <ArrowRight size={15} />
+            </Link>
+          </div>
           {featured.isLoading ? (
             <CarGridSkeleton count={8} />
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {featured.data?.map((car) => <CarCard key={car.id} car={car} />)}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[1fr]">
+              {featured.data?.map((car, idx) => (
+                <div key={car.id} className={idx===0 ? 'lg:col-span-2 lg:row-span-2' : ''}>
+                  <CarCard car={car} variant="glass" large={idx===0}/>
+                </div>
+              ))}
             </div>
           )}
         </motion.div>
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 pb-4">
 
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUp} transition={{ duration: 0.45 }}>
           <SectionHeader title="Xe mới chính hãng" sub="Xe mới 100%, bảo hành đầy đủ" link="/cars?condition=New" />
