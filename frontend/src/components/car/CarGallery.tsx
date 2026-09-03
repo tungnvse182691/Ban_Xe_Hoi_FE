@@ -40,7 +40,7 @@ export default function CarGallery({ car }: Props) {
             style={{
               border: i === active ? '2px solid #0284c7' : '2px solid transparent',
               width: '100%',
-              boxShadow: i === active ? '0 4px 12px rgba(255,107,0,.35)' : 'none',
+              boxShadow: i === active ? '0 4px 12px rgba(2,132,199,.35)' : 'none',
             }}
           />
         ))}

@@ -136,13 +136,13 @@ export default function CarList() {
         </div>
 
         <div className="flex-1">
-          {/* Toolbar */}
+          {/* Toolbar - glass */}
           <div
             className="flex flex-wrap items-center gap-2 mb-4 px-4 py-3 rounded-2xl"
-            style={{ background: '#fff', boxShadow: '0 1px 2px rgba(16,24,40,.06), 0 8px 24px -12px rgba(16,24,40,.25)' }}
+            style={{ background: 'rgba(255,255,255,0.92)', backdropFilter:'blur(12px)', border:'1px solid #e2e8f0', boxShadow: '0 4px 20px rgba(11,18,32,.08)' }}
           >
-            <span className="font-medium">
-              {isLoading ? 'Đang tìm...' : `Tìm thấy ${data?.total ?? 0} xe`}
+            <span className="font-bold font-display" style={{color:'#0b1220'}}>
+              {isLoading ? 'Đang tìm...' : `Tìm thấy ${data?.total ?? 0} xe`} <span className="font-normal text-xs" style={{color:'#64748b'}}>• Midnight filter</span>
             </span>
             <div className="flex-1" />
             <Select
