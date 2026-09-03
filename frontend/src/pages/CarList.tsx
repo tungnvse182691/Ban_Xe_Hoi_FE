@@ -8,6 +8,8 @@ import CarCard from '@/components/car/CarCard';
 import FilterPanel, { toCarFilter, type FilterValues } from '@/components/car/FilterPanel';
 import { useDebounce } from '@/hooks/useDebounce';
 import { getCarsMock } from '@/services/carService';
+import { saveSavedSearch, buildName } from '@/services/savedSearchService';
+import { useAuthStore } from '@/store/authStore';
 import { formatMileage, formatPrice } from '@/utils/format';
 
 function parseParams(sp: URLSearchParams): FilterValues & { page: number; sortBy: string } {
@@ -34,6 +36,7 @@ export default function CarList() {
   const [searchInput, setSearchInput] = useState(sp.get('search') ?? '');
   const debouncedSearch = useDebounce(searchInput, 400);
 
+  const user = useAuthStore(s=>s.user);
   const parsed = useMemo(() => parseParams(sp), [sp]);
 
   // Debounced search -> sync lên URL (không mất filter khi reload/share link)
@@ -151,6 +154,14 @@ export default function CarList() {
             <span className="font-bold font-display" style={{color:'#0b1220'}}>
               {isLoading ? 'Đang tìm...' : `Tìm thấy ${data?.total ?? 0} xe`}
             </span>
+            <Button size="small" style={{borderRadius:999}} onClick={()=>{
+              const params: Record<string,string> = {};
+              sp.forEach((v,k)=> params[k]=v);
+              if(!Object.keys(params).length){ import('react-hot-toast').then(m=>m.default.error('Chọn bộ lọc trước khi lưu')); return; }
+              const name = buildName(params);
+              saveSavedSearch({ id:`ss-${Date.now()}`, name, params, email: user?.email, createdAt: new Date().toISOString() });
+              import('react-hot-toast').then(m=>m.default.success(`Đã lưu: ${name} - sẽ báo khi có xe mới`));
+            }}>Lưu tìm kiếm</Button>
             <div className="flex-1" />
             <Select
               value={parsed.sortBy}

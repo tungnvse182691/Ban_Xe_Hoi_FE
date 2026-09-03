@@ -28,6 +28,9 @@ import { useAuthStore } from '@/store/authStore';
 import { useFavoriteStore } from '@/store/favoriteStore';
 import { useCompareStore } from '@/store/compareStore';
 import { formatPrice } from '@/utils/format';
+import LoanCalculator from '@/components/car/LoanCalculator';
+import TradeInEstimator from '@/components/car/TradeInEstimator';
+import Reviews from '@/components/car/Reviews';
 
 export default function CarDetail() {
   const { id } = useParams<{ id: string }>();
@@ -117,13 +120,22 @@ export default function CarDetail() {
 
           <CarSpecs car={car} />
 
-          <Card title="Mô tả" className="mt-4">
+          <Card title="Mô tả" className="mt-4" style={{borderRadius:16}}>
             <p style={{ whiteSpace: 'pre-line' }}>{car.description}</p>
           </Card>
 
+          <div className="grid md:grid-cols-2 gap-4 mt-4">
+            <LoanCalculator price={car.price} />
+            <TradeInEstimator />
+          </div>
+
+          <div className="mt-4">
+            <Reviews carId={car.id} />
+          </div>
+
           {similar.length > 0 && (
             <div className="mt-8">
-              <h2 className="text-xl font-bold mb-4">Xe tương tự</h2>
+              <h2 className="text-xl font-bold font-display mb-4" style={{color:'#0b1220'}}>Xe tương tự</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {similar.map((c) => (
                   <CarCard key={c.id} car={c} />
