@@ -121,17 +121,24 @@ export default function CarList() {
       </div>
 
       <div className="flex gap-6">
-        {/* Sidebar desktop */}
-        <div className="hidden lg:block w-[280px] shrink-0">
-          <Card title="Bộ lọc" className="sticky top-20">
-            <FilterPanel
-              values={parsed}
-              onChange={onFilterChange}
-              onReset={() => {
-                setSearchInput('');
-                setSp({});
-              }}
-            />
+        {/* Sidebar desktop - professional sticky, single scroll */}
+        <div className="hidden lg:block w-[300px] shrink-0">
+          <Card 
+            title={<span className="font-bold font-display">Bộ lọc</span>} 
+            className="sticky top-20"
+            styles={{ body: { padding: 0 } }}
+            style={{ maxHeight: 'calc(100vh - 6rem)', display:'flex', flexDirection:'column', borderRadius:16, overflow:'hidden' }}
+          >
+            <div className="flex-1 overflow-auto nice-scroll px-4 py-4" style={{ maxHeight: 'calc(100vh - 12rem)' }}>
+              <FilterPanel
+                values={parsed}
+                onChange={onFilterChange}
+                onReset={() => {
+                  setSearchInput('');
+                  setSp({});
+                }}
+              />
+            </div>
           </Card>
         </div>
 
@@ -142,7 +149,7 @@ export default function CarList() {
             style={{ background: 'rgba(255,255,255,0.92)', backdropFilter:'blur(12px)', border:'1px solid #e2e8f0', boxShadow: '0 4px 20px rgba(11,18,32,.08)' }}
           >
             <span className="font-bold font-display" style={{color:'#0b1220'}}>
-              {isLoading ? 'Đang tìm...' : `Tìm thấy ${data?.total ?? 0} xe`} <span className="font-normal text-xs" style={{color:'#64748b'}}>• Midnight filter</span>
+              {isLoading ? 'Đang tìm...' : `Tìm thấy ${data?.total ?? 0} xe`}
             </span>
             <div className="flex-1" />
             <Select
