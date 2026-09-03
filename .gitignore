@@ -3,3 +3,9 @@ dist/
 logs/
 .setting/
 .env
+
+# planning docs (local only)
+FE_SKILL_STACK.md
+KE_HOACH_CHI_TIET.md
+PROMPT_CHO_CHAT_CODE.md
+PROMPT_FE_FIRST.md
