@@ -30,7 +30,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}><span className="inline-flex items-center gap-1.5">🚗 Hãng xe</span></div>
+        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>Hãng xe</div>
         <Select
           className="w-full"
           placeholder="Tất cả hãng"
@@ -43,7 +43,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
       </div>
 
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>📋 Dòng xe</div>
+        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>Dòng xe</div>
         <Select
           className="w-full"
           placeholder="Tất cả dòng xe"
@@ -57,7 +57,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
       </div>
 
       <div className="p-3 rounded-xl" style={{background:'#f8fafc', border:'1px solid #e2e8f0'}}>
-        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>💰 Khoảng giá</div>
+        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>Khoảng giá</div>
         <div className="text-xs mb-1 flex justify-between" style={{color:'#0284c7', fontWeight:600}}><span>{priceLabel(values.minPrice)}</span><span>{priceLabel(values.maxPrice)}</span></div>
         <Slider
           range
@@ -90,7 +90,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
 
       <div className="p-3 rounded-xl" style={{background:'#f8fafc', border:'1px solid #e2e8f0'}}>
         <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>
-          📅 Năm: {values.yearFrom ?? 2010} - {values.yearTo ?? 2026}
+          Năm: {values.yearFrom ?? 2010} - {values.yearTo ?? 2026}
         </div>
         <Slider
           range
@@ -102,7 +102,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
       </div>
 
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>⛽ Nhiên liệu</div>
+        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>Nhiên liệu</div>
         <div className="flex flex-wrap gap-1.5">
           {['Petrol','Diesel','Electric','Hybrid'].map(f=>{
             const active = (values.fuel??[]).includes(f);
@@ -112,7 +112,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
       </div>
 
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>⚙️ Hộp số</div>
+        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>Hộp số</div>
         <div className="flex flex-wrap gap-1.5">
           {['MT','AT','CVT'].map(t=>{
             const active=(values.transmission??[]).includes(t);
@@ -122,7 +122,7 @@ export default function FilterPanel({ values, onChange, onReset }: Props) {
       </div>
 
       <div>
-        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>✨ Tình trạng</div>
+        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:'#0b1220'}}>Tình trạng</div>
         <div className="flex gap-1.5">
           {[
             { label: 'Tất cả', value: '' },
